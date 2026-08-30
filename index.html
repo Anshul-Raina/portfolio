@@ -150,7 +150,7 @@
           <span class="eyebrow">Fitness · Behaviour system</span>
           <h3>Forge</h3>
           <p>A fitness experience designed for the moment motivation fails, reframing progress around recovery and return rather than perfect streaks.</p>
-          <a class="project-link" href="https://forge-fitness-app.framer.website/" target="_blank" rel="noopener noreferrer" aria-label="Open Forge case study in a new tab">View Forge case study <span class="arrow">↗</span></a>
+          <a class="project-link" href="https://forge-fitness-app.framer.website/" aria-label="Open Forge case study">View Forge case study <span class="arrow">↗</span></a>
         </div>
       </article>
       <article class="project project-reveal" data-hover data-cursor="Open case study" data-project-href="https://atlas-smart-home-assistant.framer.website/" aria-label="Open Atlas case study">
@@ -164,7 +164,7 @@
           <span class="eyebrow">Smart home · Information architecture</span>
           <h3>Atlas</h3>
           <p>A room-first control system that matches how people locate things in a home, instead of asking them to navigate a technical device inventory.</p>
-          <a class="project-link" href="https://atlas-smart-home-assistant.framer.website/" target="_blank" rel="noopener noreferrer" aria-label="Open Atlas case study in a new tab">View Atlas case study <span class="arrow">↗</span></a>
+          <a class="project-link" href="https://atlas-smart-home-assistant.framer.website/" aria-label="Open Atlas case study">View Atlas case study <span class="arrow">↗</span></a>
         </div>
       </article>
       <article class="project project-reveal" data-hover data-cursor="Open case study" data-project-href="https://libraryos.framer.website/" aria-label="Open LibraryOS case study">
@@ -178,7 +178,7 @@
           <span class="eyebrow">Learning system · Productivity platform</span>
           <h3>LibraryOS</h3>
           <p>A unified learning workspace that connects resources, deadlines, focus sessions, progress, and the next meaningful action.</p>
-          <a class="project-link" href="https://libraryos.framer.website/" target="_blank" rel="noopener noreferrer" aria-label="Open LibraryOS case study in a new tab">View LibraryOS case study <span class="arrow">↗</span></a>
+          <a class="project-link" href="https://libraryos.framer.website/" aria-label="Open LibraryOS case study">View LibraryOS case study <span class="arrow">↗</span></a>
         </div>
       </article>
     </div>
@@ -2726,13 +2726,13 @@
     project.addEventListener('click', function(event){
       if(event.target.closest('a,button,input,textarea,select,label')) return;
       var url = project.getAttribute('data-project-href');
-      if(url) window.open(url, '_blank', 'noopener,noreferrer');
+      if(url) window.location.href = url;
     });
     project.addEventListener('keydown', function(event){
       if((event.key === 'Enter' || event.key === ' ') && event.target === project){
         event.preventDefault();
         var url = project.getAttribute('data-project-href');
-        if(url) window.open(url, '_blank', 'noopener,noreferrer');
+        if(url) window.location.href = url;
       }
     });
     project.setAttribute('tabindex','0');
