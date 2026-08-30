@@ -356,7 +356,7 @@
   </section>
   <footer id="contact">
 <div class="wrap contact contact-inner reveal-up">
-<h2 style="margin-top:1rem;">I’d love to build something great with you,<br><a class="contact-headline-link" id="contactEmail" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=anshulpankajraina%40gmail.com&amp;su=Reaching%20out%20regarding%20your%20portfolio&amp;body=Hi%20Anshul%2C%0A%0AI%20came%20across%20your%20portfolio%20and%20wanted%20to%20reach%20out%20to%20discuss%20a%20potential%20opportunity.%0A%0ABest%2C%0A" data-desktop-href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=anshulpankajraina%40gmail.com&amp;su=Reaching%20out%20regarding%20your%20portfolio&amp;body=Hi%20Anshul%2C%0A%0AI%20came%20across%20your%20portfolio%20and%20wanted%20to%20reach%20out%20to%20discuss%20a%20potential%20opportunity.%0A%0ABest%2C%0A" data-mobile-href="googlegmail:///co?to=anshulpankajraina%40gmail.com&subject=Reaching%20out%20regarding%20your%20portfolio&body=Hi%20Anshul%2C%0A%0AI%20came%20across%20your%20portfolio%20and%20would%20love%20to%20discuss%20a%20potential%20opportunity%20or%20collaboration%20with%20you.%0A%0ABest%2C%0A" data-mobile-fallback="mailto:anshulpankajraina@gmail.com?subject=Reaching%20out%20regarding%20your%20portfolio&body=Hi%20Anshul%2C%0A%0AI%20came%20across%20your%20portfolio%20and%20would%20love%20to%20discuss%20a%20potential%20opportunity%20or%20collaboration%20with%20you.%0A%0ABest%2C%0A" target="_blank" rel="noopener noreferrer" data-hover data-cursor="Write to Anshul" aria-label="Open a pre-filled email to Anshul"><em>let’s connect.</em></a></h2>
+<h2 style="margin-top:1rem;">I’d love to build something great with you,<br><a class="contact-headline-link" id="contactEmail" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=anshulpankajraina%40gmail.com&amp;su=Reaching%20out%20regarding%20your%20portfolio&amp;body=Hi%20Anshul%2C%0A%0AI%20came%20across%20your%20portfolio%20and%20wanted%20to%20reach%20out%20to%20discuss%20a%20potential%20opportunity.%0A%0ABest%2C%0A" data-desktop-href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=anshulpankajraina%40gmail.com&amp;su=Reaching%20out%20regarding%20your%20portfolio&amp;body=Hi%20Anshul%2C%0A%0AI%20came%20across%20your%20portfolio%20and%20wanted%20to%20reach%20out%20to%20discuss%20a%20potential%20opportunity.%0A%0ABest%2C%0A" data-mobile-href="googlegmail:///co?to=anshulpankajraina%40gmail.com&subject=Reaching%20out%20regarding%20your%20portfolio&body=Hi%20Anshul%2C%0A%0AI%20came%20across%20your%20portfolio%20and%20would%20love%20to%20discuss%20a%20potential%20opportunity%20or%20collaboration%20with%20you.%0A%0ABest%2C%0A" data-mobile-fallback="mailto:anshulpankajraina@gmail.com?subject=Reaching%20out%20regarding%20your%20portfolio&body=Hi%20Anshul%2C%0A%0AI%20came%20across%20your%20portfolio%20and%20would%20love%20to%20discuss%20a%20poatential%20opportunity%20or%20collaboration%20with%20you.%0A%0ABest%2C%0A" target="_blank" rel="noopener noreferrer" data-hover data-cursor="Write to Anshul" aria-label="Open a pre-filled email to Anshul"><em>let’s connect.</em></a></h2>
     </div>
     <div class="footer-bottom footer-bottom-wide">
         <span>© 2026 Anshul</span>
@@ -2720,26 +2720,54 @@
   document.addEventListener('visibilitychange',function(){if(!document.hidden)tryPlay();});
 })();
 </script>
-<script>
+
+
+<script id="forceSameTabCaseStudies">
 (function(){
-  document.querySelectorAll('.project[data-project-href]').forEach(function(project){
-    project.addEventListener('click', function(event){
-      if(event.target.closest('a,button,input,textarea,select,label')) return;
-      var url = project.getAttribute('data-project-href');
-      if(url) window.location.href = url;
-    });
-    project.addEventListener('keydown', function(event){
-      if((event.key === 'Enter' || event.key === ' ') && event.target === project){
+  var selector='.project[data-project-href]';
+
+  document.querySelectorAll(selector).forEach(function(project){
+    var link=project.querySelector('a.project-link[href]');
+
+    if(link){
+      link.removeAttribute('target');
+      link.removeAttribute('rel');
+    }
+
+    project.setAttribute('tabindex','0');
+
+    project.addEventListener('click',function(event){
+      var clickedLink=event.target.closest('a.project-link[href]');
+
+      if(clickedLink){
         event.preventDefault();
-        var url = project.getAttribute('data-project-href');
-        if(url) window.location.href = url;
+        event.stopImmediatePropagation();
+        clickedLink.removeAttribute('target');
+        window.location.assign(clickedLink.href);
+        return;
+      }
+
+      if(event.target.closest('a,button,input,textarea,select,label')) return;
+
+      var url=project.getAttribute('data-project-href');
+      if(url){
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        window.location.assign(url);
+      }
+    },true);
+
+    project.addEventListener('keydown',function(event){
+      if((event.key==='Enter'||event.key===' ')&&event.target===project){
+        event.preventDefault();
+        var url=project.getAttribute('data-project-href');
+        if(url) window.location.assign(url);
       }
     });
-    project.setAttribute('tabindex','0');
-    project.setAttribute('role','link');
   });
 })();
 </script>
+
 <script>
 (function(){
   var section = document.querySelector('.process-video-section');
